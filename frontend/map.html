@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UCSC CSE Mario Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #87CEEB 0%, #e0f7ff 100%);
+      font-family: 'Press Start 2P', cursive;
+    }
+    #map {
+      position: relative;
+      width: 3000px;
+      height: 1800px;
+      background: url('https://i.imgur.com/EZ5f1VG.jpg'); /* Daring Mario-style background */
+      background-size: cover;
+      overflow-x: auto;
+    }
+    .course {
+      position: absolute;
+      width: 180px;
+      height: 60px;
+      background-color: gold;
+      color: black;
+      border: 3px solid white;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 2px 2px 6px black;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .course:hover {
+      transform: scale(1.15);
+    }
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align: center; padding: 20px;">🍄 UCSC CSE Curriculum - Mario World Style</h2>
+
+<div id="map">
+  <svg width="3000" height="1800">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" />
+      </marker>
+    </defs>
+    <!-- Sample Arrows (you can expand as needed) -->
+    <path d="M200 200 L200 320" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M200 420 L200 540" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M450 200 L450 320" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M450 320 L700 420" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M700 420 L700 540" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+  </svg>
+
+  <!-- Row 1 -->
+  <div class="course" style="top: 120px; left: 180px;" onclick="alert('MATH 19A / 20A: Calculus')">MATH 19A</div>
+  <div class="course" style="top: 120px; left: 430px;" onclick="alert('CSE 16: Applied Discrete Math')">CSE 16</div>
+
+  <!-- Row 2 -->
+  <div class="course" style="top: 340px; left: 180px;" onclick="alert('MATH 19B / 20B: Calculus')">MATH 19B</div>
+  <div class="course" style="top: 340px; left: 430px;" onclick="alert('CSE 20: Python Programming')">CSE 20</div>
+
+  <!-- Row 3 -->
+  <div class="course" style="top: 460px; left: 700px;" onclick="alert('CSE 30: Programming Abstractions')">CSE 30</div>
+  <div class="course" style="top: 460px; left: 950px;" onclick="alert('CSE 12: Systems & Assembly')">CSE 12</div>
+  <div class="course" style="top: 460px; left: 1200px;" onclick="alert('CSE 13S: Systems in C')">CSE 13S</div>
+
+  <!-- Row 4 -->
+  <div class="course" style="top: 580px; left: 700px;" onclick="alert('CSE 101: Data Structures & Algorithms')">CSE 101</div>
+  <div class="course" style="top: 580px; left: 950px;" onclick="alert('CSE 120: Computer Architecture')">CSE 120</div>
+  <div class="course" style="top: 580px; left: 1200px;" onclick="alert('CSE 114A / 112: Programming Languages')">CSE 114A / 112</div>
+
+  <!-- Row 5 -->
+  <div class="course" style="top: 720px; left: 600px;" onclick="alert('CSE 102: Algorithms Analysis')">CSE 102</div>
+  <div class="course" style="top: 720px; left: 800px;" onclick="alert('CSE 103: Computational Models')">CSE 103</div>
+  <div class="course" style="top: 720px; left: 1000px;" onclick="alert('CSE 101M: Mathematical Thinking')">CSE 101M</div>
+
+  <!-- Row 6 -->
+  <div class="course" style="top: 860px; left: 600px;" onclick="alert('Upper Div Elective')">ELECTIVE</div>
+  <div class="course" style="top: 860px; left: 800px;" onclick="alert('CSE 107 / STAT 131: Probability')">CSE 107</div>
+  <div class="course" style="top: 860px; left: 1000px;" onclick="alert('CSE 130: Systems Design')">CSE 130</div>
+  <div class="course" style="top: 860px; left: 1200px;" onclick="alert('Upper Div Elective')">ELECTIVE</div>
+</div>
+
+</body>
+</html>
