@@ -52,7 +52,7 @@ class Course:
 # Main parsing logic
 if __name__ == '__main__':
     # Get user input for the PDF file path
-    pdf_file = input("Enter the PDF file path: ")
+    pdf_file = "SlugBot/SSR_TSRPT (3).pdf"
     
     # Extract text from the PDF
     text = print_pdf_content_as_text(pdf_file)
