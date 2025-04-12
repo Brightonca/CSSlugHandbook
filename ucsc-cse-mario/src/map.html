@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UCSC CSE Mario Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #87CEEB 0%, #e0f7ff 100%);
+      font-family: 'Press Start 2P', cursive;
+    }
+    #map {
+      position: relative;
+      width: 3000px;
+      height: 1800px;
+      background: url('https://i.imgur.com/EZ5f1VG.jpg'); /* Daring Mario-style background */
+      background-size: cover;
+      overflow-x: auto;
+    }
+    .course {
+      position: absolute;
+      width: 180px;
+      height: 60px;
+      background-color: gold;
+      color: black;
+      border: 3px solid white;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 2px 2px 6px black;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .course:hover {
+      transform: scale(1.15);
+    }
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align: center; padding: 20px;">🍄 UCSC CSE Curriculum - Mario World Style</h2>
+
+<div id="map">
+  <svg width="3000" height="1800">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" />
+      </marker>
+    </defs>
+    <!-- Sample Arrows (you can expand as needed) -->
+    <path d="M200 200 L200 320" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M200 420 L200 540" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M450 200 L450 320" stroke="black" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+    <path d="M450 32
