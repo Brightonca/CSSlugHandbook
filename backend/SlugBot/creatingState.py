@@ -462,8 +462,8 @@ class ProfessorScraper:
     """
     Retrieves professor information from RateMyProfessors for courses in the schedule.
     If the professor name (after cleaning) is 'staff', the scrape is skipped.
-    If a professor's full name returns no data and it includes a middle name,
-    the scraper retries with a shorter version (first and last name only).
+    The scraper first checks using the abbreviated name (first and last name only)
+    and, if no data is found and the name has a middle name, retries with the full name.
     Only data for a maximum of 10 courses is scraped.
     Additionally, the 'tags' list is converted to a minimal dictionary with tag frequencies.
     """
@@ -491,18 +491,23 @@ class ProfessorScraper:
                     prof_data[course][section] = None
                     continue
 
-                print(f"\nScraping info for Professor '{clean_name}' (Course {course}, Section {section})...")
-                prof_info = get_professor_info(clean_name)
+                # Determine short name (without middle name) if possible.
+                name_parts = clean_name.split()
+                if len(name_parts) >= 3:
+                    short_name = f"{name_parts[0]} {name_parts[-1]}"
+                else:
+                    short_name = clean_name
 
-                # If nothing is found and name contains a middle name, retry with first and last name only.
-                if not prof_info:
-                    name_parts = clean_name.split()
-                    if len(name_parts) >= 3:
-                        short_name = f"{name_parts[0]} {name_parts[-1]}"
-                        print(f"No data with full name '{clean_name}'. Retrying with '{short_name}'...")
-                        prof_info = get_professor_info(short_name)
+                # Try scraping using the short name first.
+                print(f"\nScraping info for Professor '{short_name}' (Course {course}, Section {section}) using short name...")
+                prof_info = get_professor_info(short_name)
 
-                # Convert tags list into a dictionary of tag frequencies.
+                # If no info was found and the short name differs from the full name, try with the full name.
+                if not prof_info and short_name != clean_name:
+                    print(f"No data with short name '{short_name}'. Retrying with full name '{clean_name}'...")
+                    prof_info = get_professor_info(clean_name)
+
+                # Convert the tags list into a dictionary of tag frequencies.
                 if prof_info and "tags" in prof_info:
                     tag_counts = {}
                     for tag in prof_info["tags"]:
