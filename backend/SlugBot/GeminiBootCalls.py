@@ -4,6 +4,7 @@ import os
 from state import state
 from creatingState import Application
 
+# Load environment variables and set up the API key.
 load_dotenv()
 api_key = os.getenv('API_KEY')
 genai.configure(api_key=api_key)
@@ -19,14 +20,13 @@ app.run()
 # ------------------------------
 # Update the state
 # ------------------------------
-# The Application.run() method updates the shared state automatically.
-# You can verify this by printing the current state.
+# The Application.run() method automatically updates the shared state.
 print("Updated shared state:", state.get())
 
 def create_advisor_prompt(user_input):
     """
     Builds a comprehensive prompt by incorporating the given academic context
-    and the user's query.
+    and the user's query. The prompt ends with an open-ended question to let the user continue the conversation.
     """
     current_state = state.get()
     
@@ -34,7 +34,8 @@ def create_advisor_prompt(user_input):
     if not current_state.get('user'):
         return "Error: User data not found in state. Please upload a transcript first."
     
-    prompt = f"""You are an academic advisor chatbot for the user at University of California, Santa Cruz for a student majoring in Computer Science. Use the following context to provide course recommendations and academic advice.
+    prompt = f"""You are an academic advisor chatbot for a student at the University of California, Santa Cruz,
+majoring in Computer Science. Use the following context to provide course recommendations and clear academic advice.
 
 User Information:
 - Name: {current_state['user']['name']}
@@ -59,32 +60,41 @@ User Information:
                 if info:
                     prompt += f"  Section {section}: {info['name']} (Rating: {info['rating']}, Difficulty: {info['difficulty']}, Take Again: {info['take_again']})\n"
     
+    # Append the user's current question and an open-ended ending for further conversation.
     prompt += f"\nUser's Question: {user_input}\n"
-    prompt += "\nBased on the above information, recommend courses for the upcoming quarter and provide clear, concise academic advice."
+    prompt += "\nBased on the above information, recommend courses for the upcoming quarter and provide clear, concise academic advice.\nWhat is your next question or concern regarding your academic plan?"
     return prompt
 
 def get_academic_advice(user_input):
     """
-    Uses the Gemini API to generate academic advising responses based on the context.
+    Uses the Gemini API to generate academic advising responses based on the context
+    combined with the current user's input.
     """
     try:
         # Create the Gemini model instance
         model = genai.GenerativeModel('gemini-1.5-pro-latest')
-        # Build the prompt by merging context with the user's query
+        # Build the prompt by merging the context with the user's question.
         prompt = create_advisor_prompt(user_input)
         # Generate content using the Gemini model
         response = model.generate_content(prompt)
         
-        # Update state with the response from Gemini
+        # Update state with the Gemini response for reference in subsequent calls.
         state.update({'gemini_response': response.text})
         return response.text
     except Exception as e:
-        # Update state with error details in case something goes wrong
+        # Capture errors and update the state so you can investigate further.
         state.update({'gemini_error': str(e)})
         return f"An error occurred: {e}"
 
 if __name__ == "__main__":
-    # Example: Ask the chatbot for course recommendations for the next quarter.
-    user_input = "I am looking for course recommendations and advice for planning my next quarter based on my current academic record."
-    advice = get_academic_advice(user_input)
-    print("Academic Advisor Response:\n", advice)
+    # Start a conversation loop with the academic advisor.
+    print("Welcome to your academic advisor chatbot. Type 'exit' to quit.")
+    while True:
+        user_input = input("\nYour question (or type 'exit' to quit): ")
+        if user_input.strip().lower() == "exit":
+            print("Exiting academic advisor session. Goodbye!")
+            break
+        
+        # Retrieve and print the advisor's response.
+        advice = get_academic_advice(user_input)
+        print("\nAcademic Advisor Response:\n", advice)
