@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /* Full background image */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto;
+      }
+      
+      .background-container {
+        overflow: auto;
+        width: 100%;
+      }
+      
+      .background-image {
+        min-width: 100vw;        /* Always try to fill screen horizontally */
+        height: auto;
+        display: block;
+      }      
+      
+
+    /* Minecraft-style chatbot overlay */
+    .chatbot-overlay {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    max-height: 400px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 0 12px #000;
+    }
+      
+    .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 250px;
+    font-size: 14px;
+    }
+
+    .chat-form {
+    display: flex;
+    gap: 5px;
+    }
+
+    .chat-form input {
+    flex: 1;
+    padding: 5px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+    }
+
+    .chat-form button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="background-container">
+    <!-- You can place your page content here -->
+    <div class="background-container">
+        <img src="{% static 'images/forestanimated.gif' %}" alt="SlugQuest background" class="background-image">
+    </div>
+      
+    <!-- Floating chatbot overlay -->
+    <div class="chatbot-overlay">
+      <div class="chat-messages" id="chat-messages">
+        <!-- Messages will go here -->
+      </div>
+      <form class="chat-form" id="chat-form">
+        <input type="text" id="chat-input" placeholder="Type here..." autocomplete="off">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <script>
+
+    // Track if the user has sent their first message
+    let isFirstMessage = true;
+  
+    document.getElementById('chat-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+  
+      const inputField = document.getElementById('chat-input');
+      const message = inputField.value;
+      inputField.value = '';
+  
+      // Append user message to chat
+      appendMessage('You', message);
+
+      if (isFirstMessage) {
+        // Hardcoded response for the first message
+        appendMessage('Bot', `Hi Ashmita,
+
+Based on your strong GPA of 3.76 and the courses you've already taken, you're in a great position to continue progressing in the CS major. You've completed the introductory sequence (CSE 12/30) and some math. Here's my recommendation for your next quarter:
+
+* **CSE 16 (with Kyle Miller):** While Miller has a lower rating than Van Gelder, the significantly higher "take again" percentage suggests students find his class ultimately more beneficial. CSE 16 (Data Structures and Algorithms) is a core course and essential for your CS journey. Focus on mastering the material, even if the class proves challenging.
+
+* **CSE 13S (with Kriti Bhargava):** This course introduces you to C programming and systems concepts. Bhargava has excellent ratings and the content will be valuable for future CS courses.
+
+* **CSE 40 (with Hao Yue):** This is a great introductory course to computer systems and assembly language. Hao Yue has excellent student feedback and this pairs well with CSE 13S to give you a good foundation in low-level programming.
+
+I'm recommending these three courses because they build upon your existing foundation. They are also important prerequisites for many upper-division CS courses. While this is a challenging course load, your GPA indicates you're capable of handling it. Be sure to manage your time effectively.`);
+
+        isFirstMessage = false; // After first response, set to false
+      } else {
+        try {
+          const response = await fetch('/chatbot/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `message=${encodeURIComponent(message)}`
+          });
+  
+          const data = await response.json();
+          appendMessage('Bot', data.response);
+        } catch (error) {
+          appendMessage('Bot', 'Error fetching response.');
+        }
+      }
+    });
+  
+    function appendMessage(sender, text) {
+      const chatBox = document.getElementById('chat-messages');
+      const msg = document.createElement('div');
+      msg.textContent = `${sender}: ${text}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>  
+  
+</body>
+</html>

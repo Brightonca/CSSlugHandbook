@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SlugQuest Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .profile img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .welcome {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile">
+    <img src="{{ user_data.picture }}" alt="Profile Picture">
+    <div>
+      <h2>Welcome, {{ user_data.given_name }}!</h2>
+      <p>{{ user_data.email }}</p>
+    </div>
+  </div>
+  
+  <div class="dashboard-content">
+    <h3>Your SlugQuest Dashboard</h3>
+    <!-- Add your dashboard content here -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload PDF</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url("{% static 'images/slug_quest_upload_bg.jpg' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .upload-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      
+        /* Optional: add padding/margin to separate from screen edges */
+        padding: 20px;
+    }
+      
+    .hidden-input {
+      display: none;
+    }
+
+    .file-name {
+      margin-top: 10px;
+      color: #fff;
+      font-size: 1.5rem;
+      font-family: fantasy;
+    }
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .decor-img {
+        width: 200px;
+        height: auto;
+    }
+      
+    .choose-img {
+        width: 400px;
+        margin-bottom: -20px;
+    }
+      
+    .upload-img {
+        max-width: 200px;
+        transition: all 0.3s ease;
+    }
+      
+  </style>
+</head>
+<body>
+  <div class="upload-container">
+    <!-- Decorative Image -->
+    <img src="{% static 'images/choose_file_sign.png' %}" alt="Slug Friend" class="decor-img"/>
+
+    <!-- Choose File Trigger Image -->
+    <label for="fileInput">
+        <img src="{% static 'images/choose_file.png' %}" alt="Choose File" class="choose-img" />
+    </label>
+
+    <input type="file" id="fileInput" name="file" class="hidden-input" onchange="handleFileChosen()" />
+
+    <p id="fileName" class="file-name"></p>
+
+    <!-- Upload Submit Image Button -->
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="file" id="realFileInput" class="hidden-input" />
+      <button type="submit">
+        <img src="{% static 'images/upload_button.png' %}" alt="Upload PDF" class="upload-img" />
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Show file name when chosen
+    function handleFileChosen() {
+      const fileInput = document.getElementById('fileInput');
+      const fileNameDisplay = document.getElementById('fileName');
+      const realInput = document.getElementById('realFileInput');
+
+      if (fileInput.files.length > 0) {
+        fileNameDisplay.textContent = `Selected: ${fileInput.files[0].name}`;
+        // Sync file with the form input
+        realInput.files = fileInput.files;
+      } else {
+        fileNameDisplay.textContent = '';
+      }
+    }
+  </script>
+</body>
+</html>
