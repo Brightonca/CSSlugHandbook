@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Login from './login';
+import Upload from './upload';
+import CourseMap from './courseMap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+
+  if (!loggedIn) {
+    return <Login onLogin={() => setLoggedIn(true)} />;
+  }
+
+  if (!uploaded) {
+    return <Upload onUpload={() => setUploaded(true)} />;
+  }
+
+  return <CourseMap />;
+};
 
 export default App;
