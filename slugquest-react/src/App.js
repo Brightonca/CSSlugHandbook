@@ -4,8 +4,8 @@ import Upload from './upload';
 import CourseMap from './courseMap';
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [uploaded, setUploaded] = useState(true);
 
   if (!loggedIn) {
     return <Login onLogin={() => setLoggedIn(true)} />;
@@ -15,7 +15,9 @@ const App = () => {
     return <Upload onUpload={() => setUploaded(true)} />;
   }
 
-  return <CourseMap />;
+  return <>
+  <CourseMap />
+  </>;
 };
 
 export default App;
