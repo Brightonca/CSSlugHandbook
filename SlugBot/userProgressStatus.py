@@ -154,7 +154,7 @@ prerequisites = {
     "MATH 20A": [],
     "MATH 20B": [["MATH 20A"]],
     "AM 10": [],
-    "MATH 21": [["MATH 11A","MATH 19A","MATH 20A"]],
+    "MATH 21": [["MATH 11A", "MATH 19A", "MATH 20A"]],
     # Updated AM 30: (AM 10 or MATH 21) and MATH 19B.
     "AM 30": [["AM 10", "MATH 21"], ["MATH 19B"]],
     "MATH 23A": [["MATH 19B", "MATH 20A"]],
@@ -168,7 +168,7 @@ prerequisites = {
     "CSE 103": [["CSE 101"]],
     "CSE 112": [["CSE 101"]],
     "CSE 114A": [["CSE 101"]],
-    "STAT 131": [["MATH 11A","MATH 19A","MATH 20A"]],
+    "STAT 131": [["MATH 11A", "MATH 19A", "MATH 20A"]],
     "CSE 107": [["CSE 16"], ["AM 30", "MATH 23A", "MATH 22"]],
     # DC Options
     "CSE 115A": [["CSE 101"], ["CSE 130"]],
@@ -191,7 +191,7 @@ prerequisites = {
     "CSE 160": [["CSE 101"], ["AM 10", "MATH 21"]],
     "CSE 161+L": [["CSE 160"]],
     "CSE 161L": [["CSE 161+L"]],
-    "CSE 162+L": [["CSE 160"]],
+    "CSE 162+L": [["CSE 101"], ["AM 10", "MATH 21"]],
     "CSE 162L": [["CSE 162+L"]],
     "CSE 163": [["CSE 101"]],
     "CSE 168": [["CSE 160"]],
@@ -250,15 +250,21 @@ class CurriculumRequirements:
         return min(missing_options, key=len)
 
     def _enhance_completed(self, completed):
-    # Enhance the set of completed courses by auto-adding prerequisites.
-    #    - If CSE 30 is taken, mark CSE 20 as satisfied.
-    #    - If MATH 19B is taken, mark MATH 19A as satisfied.
-    # """
+        """
+        Enhance the set of completed courses by auto-adding prerequisites.
+          - If CSE 30 is taken, mark CSE 20 as satisfied.
+          - If MATH 19B is taken, mark MATH 19A as satisfied.
+          - If MATH 20B is taken, mark MATH 20A as satisfied.
+          - If MATH 21 is taken, add AM 10; if AM 10 is taken, add MATH 21.
+          - Similarly for MATH 23A and AM 30.
+        """
         enhanced = set(completed)
         if "CSE 30" in enhanced:
             enhanced.add("CSE 20")
         if "MATH 19B" in enhanced:
             enhanced.add("MATH 19A")
+            enhanced.add("MATH 20A")
+            enhanced.add("MATH 20B")
         if "MATH 20B" in enhanced:
             enhanced.add("MATH 20A")
         if "MATH 21" in enhanced:
@@ -269,11 +275,7 @@ class CurriculumRequirements:
             enhanced.add("AM 30")
         if "AM 30" in enhanced:
             enhanced.add("MATH 23A")
-        if "MATH 19B" in enhanced:
-            enhanced.add("MATH 20A")
-            enhanced.add("MATH 20B")
         return enhanced
-    
 
     @property
     def remaining_requirements(self):
@@ -330,7 +332,75 @@ class CurriculumRequirements:
         return eligible
 
 # ------------------------------------------------------------------------------
-# PART 4: Main Transcript Parsing and Curriculum Check
+# PART 4: Categorizing Eligible Courses for a Nice Printout
+# ------------------------------------------------------------------------------
+
+def group_eligible_courses(curriculum):
+    """
+    Build a dictionary that groups eligible courses (by their codes)
+    into "Lower Division", "Upper Division", and "Electives" based on the
+    'requirements' structure.
+    
+    For requirement groups that are "one_of" or "plus_one_of" (i.e. alternatives),
+    if more than one eligible option exists, join them with " or ".
+    """
+    eligible_set = set(curriculum.eligible_courses)
+    grouped = {"Lower Division": {}, "Upper Division": {}, "Electives": []}
+    
+    # Process Lower Division groups.
+    lower_req = requirements.get("Lower_Division", {})
+    for subcat, group in lower_req.items():
+        subcat_list = []
+        # For "mandatory" and "additional" lists.
+        for key in ["mandatory", "additional"]:
+            if key in group:
+                for course in group[key]:
+                    if course in eligible_set:
+                        subcat_list.append(course)
+        # For alternative requirements ("one_of" and "plus_one_of").
+        for key in ["one_of", "plus_one_of"]:
+            if key in group:
+                for alt_group in group[key]:
+                    # Get all courses from the alternative that are eligible.
+                    alt_eligible = [course for course in alt_group if course in eligible_set]
+                    if alt_eligible:
+                        # Join alternatives with " or ".
+                        alt_str = " or ".join(alt_eligible)
+                        subcat_list.append(alt_str)
+        if subcat_list:
+            grouped["Lower Division"][subcat] = subcat_list
+
+    # Process Upper Division groups.
+    upper_req = requirements.get("Upper_Division", {})
+    for subcat, group in upper_req.items():
+        subcat_list = []
+        for key in ["mandatory"]:
+            if key in group:
+                for course in group[key]:
+                    if course in eligible_set:
+                        subcat_list.append(course)
+        for key in ["one_of", "plus_one_of"]:
+            if key in group:
+                for alt_group in group[key]:
+                    alt_eligible = [course for course in alt_group if course in eligible_set]
+                    if alt_eligible:
+                        alt_str = " or ".join(alt_eligible)
+                        subcat_list.append(alt_str)
+        if subcat_list:
+            grouped["Upper Division"][subcat] = subcat_list
+
+    # Process Electives.
+    elec_req = requirements.get("Electives", {})
+    if elec_req:
+        elective_list = elec_req.get("list", [])
+        eligible_electives = [course for course in elective_list if course in eligible_set]
+        if eligible_electives:
+            grouped["Electives"] = eligible_electives
+
+    return grouped
+
+# ------------------------------------------------------------------------------
+# PART 5: Main Transcript Parsing, Curriculum Check, and Grouped Output
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
     pdf_file = input("Enter the PDF file path: ")
@@ -392,10 +462,34 @@ if __name__ == '__main__':
     else:
         print("All requirements satisfied!")
     
-    print("\n----- Eligible Courses to Take Next -----")
+    print("\n----- Eligible Courses to Take Next (Flat List) -----")
     eligibles = curriculum.eligible_courses
     if eligibles:
         for c in eligibles:
             print(f"- {c}")
     else:
         print("No courses available (or prerequisites not met).")
+    
+    # Now print the eligible courses grouped by category.
+    grouped = group_eligible_courses(curriculum)
+    
+    print("\n----- Eligible Courses Grouped by Category -----\n")
+    
+    if grouped["Lower Division"]:
+        print("LOWER DIVS:")
+        for subcat, courses in grouped["Lower Division"].items():
+            for course_line in courses:
+                print(f"- {course_line}")
+            print()  # Blank line between subcategories
+    
+    if grouped["Upper Division"]:
+        print("UPPER DIVS:")
+        for subcat, courses in grouped["Upper Division"].items():
+            for course_line in courses:
+                print(f"- {course_line}")
+            print()
+    
+    if grouped["Electives"]:
+        print("ELECTIVES:")
+        for course in grouped["Electives"]:
+            print(f"- {course}")
