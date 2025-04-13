@@ -25,12 +25,16 @@ def get_professor_info(name, university="University of California Santa Cruz"):
 
     try:
         # Wait until the resulting list of professors load.
-        # 5 SECOND DELAY; INITIALLY 10 SECONDS; CHANGE AT YOUR OWN RISK.
-        WebDriverWait(driver, 5).until(
+        # 3 SECOND DELAY; INITIALLY 10 SECONDS; CHANGE AT YOUR OWN RISK.
+        WebDriverWait(driver, 3).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "a[href*='/professor/']"))
         )
 
         cards = driver.find_elements(By.CSS_SELECTOR, "a[href*='/professor/']")
+        prof_url = None
+        prof_name = None
+        school = None
+        
         for card in cards:
             try:
                 prof_name = card.find_element(By.CSS_SELECTOR, "div.CardName__StyledCardName-sc-1gyrgim-0").text.strip()
@@ -44,11 +48,15 @@ def get_professor_info(name, university="University of California Santa Cruz"):
                 print(f"Card parsing error: {e}")
                 continue
 
+        if prof_url is None:
+            print(f"No matching professor found for {name} at {university}")
+            driver.quit()
+            return None
 
         # Go to the professor's page.
-        # 5 SECOND DELAY; INITIALLY 10; CHANGE AT YOUR OWN RISK.
+        # 3 SECOND DELAY; INITIALLY 10; CHANGE AT YOUR OWN RISK.
         driver.get(prof_url)
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 3).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "div.RatingValue__Numerator-qw8sqy-2"))
         )
 
@@ -96,7 +104,7 @@ def get_professor_info(name, university="University of California Santa Cruz"):
         driver.quit()
         return None
 
-# Testing.
-professor = "Patrick Tantalo"
-prof_info = get_professor_info(professor)
-print(prof_info)
+# # Testing.
+# professor = "Patrick Tantalo"
+# prof_info = get_professor_info(professor)
+# print(prof_info)
