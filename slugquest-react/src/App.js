@@ -16,7 +16,9 @@ const App = () => {
   }
 
   return <>
-  <CourseMap />
+    <div className="topnav">
+      <CourseMap />
+    </div>
   </>;
 };
 

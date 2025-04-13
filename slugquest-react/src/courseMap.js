@@ -2,49 +2,51 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const courses = [
-  { name: 'MATH 19A or MATH 20A', x: '10vh', y: '10vh' },
-  { name: 'MATH 19B or MATH 20B', x: 100, y: 200 },
-  { name: 'CSE 16', x: 100, y: 300 },
-  { name: 'AM 30', x: 250, y: 200 },
-  { name: 'MATH 23A', x: 100, y: 400 },
-  { name: 'CSE 101', x: 300, y: 500 },
-  { name: 'CSE 101M', x: 400, y: 500 },
-  { name: 'CSE 102 or CSE 103', x: 200, y: 600 },
-  { name: 'CSE 130', x: 300, y: 600 },
-  { name: 'CSE 107 or STATS 131', x: 400, y: 600 },
-  { name: 'CSE 114A', x: 300, y: 500 },
-  { name: 'CSE 20', x: 600, y: 100 },
-  { name: 'CSE 12', x: 500, y: 200 },
-  { name: 'CSE 30', x: 600, y: 200 },
-  { name: 'CSE 40', x: 300, y: 500 },
-  { name: 'CSE 13S', x: 500, y: 400 },
-  { name: 'CSE 120', x: 500, y: 500 },
-  { name: 'Upper Elective', x: 300, y: 500 },
-  { name: 'Upper Elective', x: 300, y: 500 },
-  { name: 'Upper Elective', x: 300, y: 500 },
-  { name: 'Upper Elective', x: 300, y: 500 },
-  { name: 'Disciplinary Communication', x: 300, y: 500 },
-  { name: 'Capstone', x: 300, y: 500 },
+  { name: 'MATH 19A MATH 20A', x: 500, y: 600 },
+  { name: 'MATH 19B MATH 20B', x: 500, y: 900 },
+  { name: 'CSE 16', x: 400, y: 1200 },
+  { name: 'MATH 21 AM 10', x: 150, y: 900 },
+  { name: 'AM 30', x: 200, y: 1200 },
+  { name: 'MATH 23A', x: 270, y: 1200 },
+  { name: 'ECE 30', x: 532, y: 1200 },
+  { name: 'CSE 101', x: 700, y: 1500 },
+  { name: 'CSE 101M', x: 600, y: 1800 },
+  { name: 'CSE 102 CSE 103', x: 1000, y: 1800 },
+  { name: 'CSE 130', x: 400, y: 1800 },
+  { name: 'CSE 107 STATS 131', x: 300, y: 1500 },
+  { name: 'CSE 114A', x: 800, y: 1800 },
+  { name: 'CSE 20', x: 1000, y: 625 },
+  { name: 'CSE 12', x: 1100, y: 900 },
+  { name: 'CSE 30', x: 900, y: 900 },
+  { name: 'CSE 40', x: 760, y: 1200 },
+  { name: 'CSE 13S', x: 1100, y: 1200 },
+  { name: 'CSE 120', x: 1100, y: 1500 },
+  { name: 'Upper Elective', x: 305, y: 2030 },
+  { name: 'Upper Elective', x: 200, y: 2030 },
+  { name: 'Upper Elective', x: 200, y: 2100 },
+  { name: 'Upper Elective', x: 305, y: 2100 },
+  { name: 'CSE 115A CSE 185 CSE 195', x: 1100, y: 2100 },
+  { name: 'Capstone', x: 700, y: 2200 },
 ];
 
-const connections = [
-  ['MATH 19A', 'MATH 19B'],
-  ['MATH 19A', 'CSE 16'],
-  ['MATH 19B', 'AM 30'],
-  ['MATH 19B', 'CSE 101'],
-  ['CSE 20', 'CSE 12'],
-  ['CSE 20', 'CSE 30'],
-  ['CSE 12', 'CSE 13S'],
-  ['CSE 13S', 'CSE 120'],
-  ['CSE 13S', 'CSE 101'],
-  ['AM 30', 'CSE 101'],
-  ['MATH 23A', 'CSE 101'],
-  ['CSE 101', 'CSE 102'],
-  ['CSE 101', 'CSE 130'],
-  ['CSE 16', 'CSE 107'],
-  ['MATH 23A', 'CSE 107'],
-  ['AM 30', 'CSE 107'],
-];
+// const connections = [
+//   ['MATH 19A', 'MATH 19B'],
+//   ['MATH 19A', 'CSE 16'],
+//   ['MATH 19B', 'AM 30'],
+//   ['MATH 19B', 'CSE 101'],
+//   ['CSE 20', 'CSE 12'],
+//   ['CSE 20', 'CSE 30'],
+//   ['CSE 12', 'CSE 13S'],
+//   ['CSE 13S', 'CSE 120'],
+//   ['CSE 13S', 'CSE 101'],
+//   ['AM 30', 'CSE 101'],
+//   ['MATH 23A', 'CSE 101'],
+//   ['CSE 101', 'CSE 102'],
+//   ['CSE 101', 'CSE 130'],
+//   ['CSE 16', 'CSE 107'],
+//   ['MATH 23A', 'CSE 107'],
+//   ['AM 30', 'CSE 107'],
+// ];
 
 const CourseMap = () => {
 
@@ -61,17 +63,15 @@ const CourseMap = () => {
     }, 500);
   }, [isBright]);
 
-  const hoverCheck = (id) => {
+  const hoverCheck = (id, color) => {
     if (id !== isHovered) {
-      if (isBright) return "lighterYellow";
-      else return "darkerYellow";
+      if (isBright) return `lighter${color}`;
+      else return `darker${color}`;
     }
   }
 
-  return <div className="overflow-auto bg-gradient-to-b from-blue-300 to-green-600 font-mono mapContainer">
-    <div
-      className="relative mx-auto mapImage"
-    >
+  return <div className="bg-gradient-to-b from-blue-300 to-green-600 mapContainer">
+    <div className="mapImage"></div>
       {/*}
       <svg className="absolute top-0 left-0 w-full h-full z-0">
         {connections.map(([from, to], index) => {
@@ -118,13 +118,13 @@ const CourseMap = () => {
           key={index}
           onMouseEnter={() => setIsHovered(index)}
           onMouseLeave={() => setIsHovered(-1)}
-          className={`${hoverCheck(index)} relative bg-yellow-300 bg-opacity-100 border-2 border-white shadow-md text-black px-3 py-2 rounded-xl cursor-pointer hover:bg-yellow-400 transition-all z-10 classNode`}
+          className={`${hoverCheck(index, 'Yellow')} absolute border-2 border-white shadow-md text-black px-3 py-2 rounded-xl cursor-pointer z-10 classNode`}
           style={{top: course.y, left: course.x}}
         >
           {course.name}
         </div>
       ))}
-    </div>
+    {/* </div> */}
   </div>
 };
 
