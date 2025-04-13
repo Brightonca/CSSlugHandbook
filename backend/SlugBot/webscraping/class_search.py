@@ -121,4 +121,4 @@ def fetch_and_scrape_all(term, subject):
     # ----------------------------------------------- #
 
 # 2252 = 2025 Spring Quarter (adjacent quarters differ by 2).
-fetch_and_scrape_all("2252", "CSE")
+fetch_and_scrape_all("2256", "CSE")

@@ -1,2 +1,4 @@
 /.venv
 SlugBot/.env
+/.git
+/SlugBot/Transcripts

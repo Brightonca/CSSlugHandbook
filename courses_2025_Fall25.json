@@ -1,0 +1,347 @@
+[
+  {
+    "course": "CSE3: Personal Computer Concepts: Software and Hardware",
+    "sections": {
+      "Section 01": "Gerald B Moulds (gmoulds)"
+    }
+  },
+  {
+    "course": "CSE12: Computer Systems and Assembly Language and Lab",
+    "sections": {
+      "Section 01": "Sagnik Nath (sanath)",
+      "Section 02": "Marcelo Siero (msiero2)"
+    }
+  },
+  {
+    "course": "CSE13S: Comp Sys and C Program",
+    "sections": {
+      "Section 01": "Staff",
+      "Section 02": "Kriti Bhargava (kbharga1)"
+    }
+  },
+  {
+    "course": "CSE16: Applied Discrete Mathematics",
+    "sections": {
+      "Section 01": "Kyle A Miller (kymiller)",
+      "Section 02": "Staff",
+      "Section 03": "Allen Van Gelder (avg)"
+    }
+  },
+  {
+    "course": "CSE20: Beginning Programming in Python",
+    "sections": {
+      "Section 01": "Staff",
+      "Section 02": "Staff",
+      "Section 03": "Hao Yue (hyue11)",
+      "Section 04": "Benedict John Paten (bpaten)"
+    }
+  },
+  {
+    "course": "CSE30: Programming Abstractions: Python",
+    "sections": {
+      "Section 01": "Staff",
+      "Section 02": "Staff"
+    }
+  },
+  {
+    "course": "CSE40: Machine Learning Basics: Data Analysis and Empirical Methods",
+    "sections": {
+      "Section 01": "Staff",
+      "Section 02": "Hao Yue (hyue11)"
+    }
+  },
+  {
+    "course": "CSE80A: Universal Access: Disability, Technology, and Society",
+    "sections": {
+      "Section 01": "Roberto Manduchi (manduchi)"
+    }
+  },
+  {
+    "course": "CSE80N: Introduction to Networking and the Internet",
+    "sections": {
+      "Section 01": "Richard J Graziani (rgrazian)"
+    }
+  },
+  {
+    "course": "CSE100: Logic Design",
+    "sections": {
+      "Section 01": "Marcelo Orenes-Vera (morenesv)"
+    }
+  },
+  {
+    "course": "CSE100L: Logic Design Laboratory",
+    "sections": {
+      "Section 01": "Marcelo Orenes-Vera (morenesv)"
+    }
+  },
+  {
+    "course": "CSE101: Introduction to Data Structures and Algorithms",
+    "sections": {
+      "Section 01": "Patrick Tantalo (ptantalo)",
+      "Section 02": "Niloofar Montazeri (nimontaz)"
+    }
+  },
+  {
+    "course": "CSE101M: Mathematical Thinking for Computer Science",
+    "sections": {
+      "Section 01": "Evangelos Chatziafratis (evchatzi)",
+      "Section 02": "Alexandra Kolla (akolla)"
+    }
+  },
+  {
+    "course": "CSE102: Introduction to Analysis of Algorithms",
+    "sections": {
+      "Section 01": "Delbert D Bailey (ddbailey)"
+    }
+  },
+  {
+    "course": "CSE107: Probability and Statistics for Engineers (formerly Math Systems: Stochastic)",
+    "sections": {
+      "Section 01": "Patrick Tantalo (ptantalo)"
+    }
+  },
+  {
+    "course": "CSE108: Algorithmic Foundations of Cryptography",
+    "sections": {
+      "Section 01": "Ioannis Demertzis (idemertz)"
+    }
+  },
+  {
+    "course": "CSE114A: Foundations of Programming Languages",
+    "sections": {
+      "Section 01": "Kriti Bhargava (kbharga1)"
+    }
+  },
+  {
+    "course": "CSE115A: Introduction to Software Engineering",
+    "sections": {
+      "Section 01": "Richard Konrad Jullig (rjullig)",
+      "Section 02": "Richard Konrad Jullig (rjullig)"
+    }
+  },
+  {
+    "course": "CSE120: Computer Architecture",
+    "sections": {
+      "Section 01": "Sagnik Nath (sanath)",
+      "Section 02": "Yuanchao Xu (yxu314)"
+    }
+  },
+  {
+    "course": "CSE121: Embedded System Design",
+    "sections": {
+      "Section 01": "Marcelo Siero (msiero2)"
+    }
+  },
+  {
+    "course": "CSE122: Introduction to VLSI Digital System Design",
+    "sections": {
+      "Section 01": "Matthew R Guthaus (mrg)"
+    }
+  },
+  {
+    "course": "CSE125: Logic Design with Verilog",
+    "sections": {
+      "Section 01": "Dustin Alexander Richmond (durichmo)"
+    }
+  },
+  {
+    "course": "CSE130: Principles of Computer Systems Design",
+    "sections": {
+      "Section 01": "Staff",
+      "Section 02": "Andrew Quinn (aquinn1)"
+    }
+  },
+  {
+    "course": "CSE132: Computer Security",
+    "sections": {
+      "Section 01": "Alvaro Cardenas (alacarde)"
+    }
+  },
+  {
+    "course": "CSE134: Embedded Operating Systems",
+    "sections": {
+      "Section 01": "Liting Hu (lhu82)"
+    }
+  },
+  {
+    "course": "CSE140: Artificial Intelligence",
+    "sections": {
+      "Section 01": "Niloofar Montazeri (nimontaz)"
+    }
+  },
+  {
+    "course": "CSE142: Machine Learning and Data Mining",
+    "sections": {
+      "Section 01": "Staff"
+    }
+  },
+  {
+    "course": "CSE150: Introduction to Computer Networks",
+    "sections": {
+      "Section 01": "Staff"
+    }
+  },
+  {
+    "course": "CSE156: Network Programming",
+    "sections": {
+      "Section 01": "Staff"
+    }
+  },
+  {
+    "course": "CSE156L: Network Programming Laboratory",
+    "sections": {
+      "Section 01": "Staff"
+    }
+  },
+  {
+    "course": "CSE180: Database Systems I",
+    "sections": {
+      "Section 01": "Nikos Tziavelis (ntziavel)"
+    }
+  },
+  {
+    "course": "CSE185E: Technical Writing for Computer Science and Engineering",
+    "sections": {
+      "Section 01": "Gerald B Moulds (gmoulds)"
+    }
+  },
+  {
+    "course": "CSE185S: Technical Writing and Communication in Computer Science",
+    "sections": {
+      "Section 01": "Gerald B Moulds (gmoulds)"
+    }
+  },
+  {
+    "course": "CSE186: Full Stack Web Development I",
+    "sections": {
+      "Section 01": "David Charles Harrison (dcharris)"
+    }
+  },
+  {
+    "course": "CSE200: Research and Teaching in Computer Science and Engineering",
+    "sections": {
+      "Section 01": "Staff"
+    }
+  },
+  {
+    "course": "CSE201: Analysis of Algorithms",
+    "sections": {
+      "Section 01": "Sungjin Im (sim9)"
+    }
+  },
+  {
+    "course": "CSE206C: Foundations of Modern Cryptography",
+    "sections": {
+      "Section 01": "Ioannis Demertzis (idemertz)"
+    }
+  },
+  {
+    "course": "CSE206G: Game Theory and Applications in Computer Science and Engineering",
+    "sections": {
+      "Section 01": "John T Musacchio (musacchi)"
+    }
+  },
+  {
+    "course": "CSE208: Introduction to Information Theory",
+    "sections": {
+      "Section 01": "Hamid Sadjadpour (hamid)"
+    }
+  },
+  {
+    "course": "CSE216: Formal Methods",
+    "sections": {
+      "Section 01": "Daniel Juon Fremont (dfremont)"
+    }
+  },
+  {
+    "course": "CSE222A: VLSI Digital System Design",
+    "sections": {
+      "Section 01": "Matthew R Guthaus (mrg)"
+    }
+  },
+  {
+    "course": "CSE225: Introduction to ASIC Systems Design",
+    "sections": {
+      "Section 01": "Dustin Alexander Richmond (durichmo)"
+    }
+  },
+  {
+    "course": "CSE231: Advanced Operating Systems",
+    "sections": {
+      "Section 01": "Scott A Brandt (sbrandt)"
+    }
+  },
+  {
+    "course": "CSE244A: Foundations of Deep Learning",
+    "sections": {
+      "Section 01": "Yuyin Zhou (yzhou284)"
+    }
+  },
+  {
+    "course": "CSE253: Network Security",
+    "sections": {
+      "Section 01": "Ram Sundara Raman (rsundar2)"
+    }
+  },
+  {
+    "course": "CSE269: Approximation Algorithms",
+    "sections": {
+      "Section 01": "Evangelos Chatziafratis (evchatzi)"
+    }
+  },
+  {
+    "course": "CSE280G: VLSI/CAD Seminar",
+    "sections": {
+      "Section 01": "Scott Beamer (sbeamer) Jose Renau (renau) Heiner H Litz (hlitz) Dustin Alexander Richmond (durichmo) Matthew R Guthaus (mrg)"
+    }
+  },
+  {
+    "course": "CSE280N: Seminar on Networks",
+    "sections": {
+      "Section 01": "Katia Obraczka (obraczka)",
+      "Section 02": "Chen Qian (cqian12)"
+    }
+  },
+  {
+    "course": "CSE280O: Seminar in Applied Programming Languages",
+    "sections": {
+      "Section 01": "Lindsey A Kuper (lkuper) Tyler R Sorensen (tysorens)"
+    }
+  },
+  {
+    "course": "CSE280P: Seminar on Parallel Processing",
+    "sections": {
+      "Section 01": "Jose Renau (renau)"
+    }
+  },
+  {
+    "course": "CSE280S: Seminar on Computer Systems",
+    "sections": {
+      "Section 01": "Heiner H Litz (hlitz)"
+    }
+  },
+  {
+    "course": "CSE280V: Seminar on Computer Vision",
+    "sections": {
+      "Section 01": "Roberto Manduchi (manduchi)"
+    }
+  },
+  {
+    "course": "CSE280X: Seminar in Distributed Systems",
+    "sections": {
+      "Section 01": "Peter A Alvaro (palvaro)"
+    }
+  },
+  {
+    "course": "CSE290D: Neural Computation",
+    "sections": {
+      "Section 01": "Cihang Xie (cixie)"
+    }
+  },
+  {
+    "course": "CSE290S: Advanced Topics in Computer Systems",
+    "sections": {
+      "Section 01": "Peter A Alvaro (palvaro)"
+    }
+  }
+]

@@ -58,6 +58,6 @@ def extract_course_data(YEAR, QUARTER, QUARTER_INDEX):
     print(f"Saved {len(results)} courses to {filename}")
     # ---------------------------------- #
 
-# -- TESTING; COMMENT OUT LATER -- #
-extract_course_data(2025, "Fall25", 0)
-# -------------------------------- #
+# # -- TESTING; COMMENT OUT LATER -- #
+# extract_course_data(2025, "Fall25", 0)
+# # -------------------------------- #
