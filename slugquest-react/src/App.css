@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+.classNode {
+  max-width: 8.5em;
+  /* animation-name: mymove;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite; */
+}
+
+/* @keyframes mymove {
+  0% {background-color: #fff12b;}
+  0.01% {background-color: #c9bf2c;}
+  49% {background-color: #c9bf2c;}
+  49.9% {background-color: #fff12b  ;}
+} */
+
+.classNode:hover {
+  animation: 0;
+  background-color: #facc15;
+}
+
+.classNode.lighterYellow {
+  background-color: #fff12b;
+}
+
+.classNode.darkerYellow {
+  background-color: #c9bf2c;
+}
+
+.mapImage {
+  width: 100%;
+  height: 100%;
+  background-image: url('./forestmap.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  overflow: auto;
+}
+
+.mapContainer {
+  --containerWidth: 100%;
+  min-width: 100vh;
+  min-height: 100vh;
+  max-width: 100%;
+  width: 100%;
+  height: 300vh;
+  /* max-height: 100%; */
+  /* overflow-y: scroll; */
+  /* display: ; */
+}
